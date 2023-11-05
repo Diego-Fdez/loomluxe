@@ -1,0 +1,38 @@
+{
+  "expo": {
+    "name": "Loomluxe",
+    "slug": "loomluxe",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1E1E1E"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.diegofedez.loomluxe"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#E8E3DC"
+      },
+      "package": "com.diegofedez.loomluxe"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "owner": "diegofedez",
+    "extra": {
+      "eas": {
+        "projectId": "6fc1dcc9-7fad-415d-83c4-7ced760416d7"
+      }
+    }
+  }
+}
