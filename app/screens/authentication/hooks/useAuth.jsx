@@ -11,6 +11,7 @@ const useAuth = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
 
   const addUserInfo = userStore((state) => state.addUserInfo)
   const removeUser = userStore((state) => state.removeUserInfo)
@@ -104,6 +105,10 @@ const useAuth = () => {
     return client
   }
 
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword)
+  }
+
   return {
     name,
     setName,
@@ -115,6 +120,8 @@ const useAuth = () => {
     signup,
     signOut,
     forgotPassword,
+    showPassword,
+    handleShowPassword,
   }
 }
 

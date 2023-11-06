@@ -1,18 +1,21 @@
-import { useState } from 'react'
 import { Link } from '@react-navigation/native'
 import { TextInput, Text, TouchableOpacity, View } from 'react-native'
 import { Entypo } from '@expo/vector-icons'
 import normalize from 'react-native-normalize'
 import { useAuth } from '../hooks'
 import { styles } from '../styles/LoginForm.styles'
+import { rooStyles } from '../../../constants'
 
 const LoginForm = () => {
-  const { email, setEmail, password, setPassword, login } = useAuth()
-  const [showPassword, setShowPassword] = useState(false)
-
-  const handleShowPassword = () => {
-    setShowPassword(!showPassword)
-  }
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    login,
+    showPassword,
+    handleShowPassword,
+  } = useAuth()
 
   return (
     <>
@@ -40,9 +43,9 @@ const LoginForm = () => {
           style={styles.hideTextButton}
         >
           {showPassword ? (
-            <Entypo name="eye" size={24} color="#114949" />
+            <Entypo name="eye" size={24} color={rooStyles.bgButton} />
           ) : (
-            <Entypo name="eye-with-line" size={24} color="#114949" />
+            <Entypo name="eye-with-line" size={24} color={rooStyles.bgButton} />
           )}
         </TouchableOpacity>
       </View>

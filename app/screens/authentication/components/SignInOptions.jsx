@@ -1,26 +1,13 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import { AntDesign, FontAwesome5 } from '@expo/vector-icons'
-import normalize from 'react-native-normalize'
 import { GOOGLE_ICON } from '../../../utils'
-// import { useAuth } from '../hooks'
+import { styles } from '../styles/SigInOptions.styles'
 
 const SignInOptions = () => {
-  // const { loginOAuth } = useAuth()
-
   return (
     <>
-      <Text
-        className={`font-normal text-center`}
-        style={{
-          fontFamily: 'mrt-400',
-          fontSize: normalize(14),
-          marginTop: normalize(33, 'height'),
-          marginBottom: normalize(10, 'height'),
-        }}
-      >
-        Or continue with
-      </Text>
-      <View className="flex-row gap-8 items-center justify-center">
+      <Text style={styles.text}>Or continue with</Text>
+      <View style={styles.buttonContainer}>
         <TouchableOpacity onPress={() => {}}>{GOOGLE_ICON}</TouchableOpacity>
 
         <TouchableOpacity onPress={() => {}}>
