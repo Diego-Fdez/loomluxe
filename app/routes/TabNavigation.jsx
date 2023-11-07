@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, Dimensions, Image } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import normalize from 'react-native-normalize'
 import Svg, { Path } from 'react-native-svg'
-import { HomeScreen, ProfileScreen } from '../screens'
+import { ARScreen, HomeScreen, ProfileScreen } from '../screens'
 import MyDrawer from './DrawerNavigation'
 import { userStore } from '../store'
 
@@ -73,8 +73,8 @@ const TabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="home2"
-        component={HomeScreen}
+        name="arScreen"
+        component={ARScreen}
         options={{
           headerShown: false,
           tabBarLabel: () => null,
