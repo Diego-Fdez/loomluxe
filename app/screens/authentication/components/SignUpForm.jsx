@@ -7,7 +7,9 @@ import {
   View,
 } from 'react-native'
 import { Entypo } from '@expo/vector-icons'
+import normalize from 'react-native-normalize'
 import { useAuth } from '../hooks'
+import { styles } from '../styles/LoginForm.styles'
 
 const SignUpForm = () => {
   const height = Dimensions.get('window').height
@@ -22,40 +24,37 @@ const SignUpForm = () => {
 
   return (
     <>
+      <Text style={styles.label}>Name</Text>
       <TextInput
-        placeholder="Name"
-        keyboardType="default"
-        className={`w-full bg-[#CFD1C0] rounded-lg py-4 px-4 ${
-          height <= 690 ? 'mb-2' : 'my-4'
-        }`}
-        style={{ fontFamily: 'mrt-400' }}
+        placeholder="John"
+        style={styles.input}
         value={name}
         onChangeText={setName}
       />
-
+      <Text style={[styles.label, { marginTop: normalize(11, 'height') }]}>
+        Email
+      </Text>
       <TextInput
-        placeholder="Email"
+        placeholder="loomis.b@gmail.com"
         keyboardType="email-address"
-        className={`w-full bg-[#CFD1C0] rounded-lg py-4 px-4 ${
-          height <= 690 ? 'my-2' : 'my-4'
-        }`}
-        style={{ fontFamily: 'mrt-400' }}
+        style={styles.input}
         value={email}
         onChangeText={setEmail}
       />
-
-      <View className="flex-row items-center justify-center my-6">
+      <Text style={[styles.label, { marginTop: normalize(11, 'height') }]}>
+        Password
+      </Text>
+      <View style={styles.inputWrapper}>
         <TextInput
-          placeholder="Password"
+          placeholder="Minimum 8 characters"
           secureTextEntry={!showPassword}
-          className="bg-[#CFD1C0] w-full rounded-lg py-4 pl-4 pr-16"
-          style={{ fontFamily: 'mrt-400' }}
+          style={styles.input}
           value={password}
           onChangeText={setPassword}
         />
         <TouchableOpacity
           onPress={handleShowPassword}
-          className="absolute right-5"
+          style={styles.hideTextButton}
         >
           {showPassword ? (
             <Entypo name="eye" size={24} color="black" />
@@ -65,11 +64,8 @@ const SignUpForm = () => {
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity
-        className="w-full rounded-lg bg-[#809671] flex items-center justify-center py-3"
-        onPress={signup}
-      >
-        <Text className="text-2xl text-white">Sign Up</Text>
+      <TouchableOpacity style={styles.button} onPress={signup}>
+        <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
     </>
   )

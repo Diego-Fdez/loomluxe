@@ -7,7 +7,7 @@ import {
 } from 'react-native'
 import normalize from 'react-native-normalize'
 import { Ionicons } from '@expo/vector-icons'
-import { useNavigation } from '@react-navigation/native'
+import { StatusBar } from 'expo-status-bar'
 import { CarouselScreen } from './components'
 import {
   CartIcon,
@@ -19,44 +19,33 @@ import { useCategory } from './hook'
 import { productStore } from '../../store'
 import { useProducts } from '../../hooks'
 import Cards from '../../components/cards/Cards'
+import { styles } from './styles/HomeScreen.styles'
+import { rooStyles } from '../../constants'
 
-const HomeScreen = () => {
-  const navigation = useNavigation()
-  const { image } = useCategory()
+const HomeScreen = ({ navigation }) => {
+  const { categories } = useCategory()
   const isLoading = productStore((state) => state.isLoading)
   const { getProductsByView } = useProducts()
 
   if (isLoading) return <SpinnerScreen />
 
   return (
-    <SafeAreaView className="flex-1 bg-primary items-center">
-      <View
-        className="w-full flex-row justify-between items-center"
-        style={{
-          marginTop: normalize(44, 'height'),
-          paddingLeft: normalize(12, 'width'),
-          marginBottom: normalize(44, 'height'),
-          paddingRight: normalize(22, 'width'),
-        }}
-      >
-        <TouchableOpacity
-          className="mr-2"
-          onPress={() => navigation.openDrawer()}
-        >
-          <Ionicons name="menu-sharp" size={35} color="#114949" />
+    <SafeAreaView style={styles.container}>
+      <StatusBar
+        style="light"
+        backgroundColor={rooStyles.bgPrimary}
+        translucent={true}
+      />
+      <View style={styles.navContainer}>
+        <TouchableOpacity onPress={() => navigation.openDrawer()}>
+          <Ionicons name="menu-sharp" size={35} color={rooStyles.textPrimary} />
         </TouchableOpacity>
         <TouchableOpacity
-          className="pl-1 h-11 rounded-lg bg-secondary flex flex-row items-center gap-1 mr-1"
-          style={{ width: normalize(267) }}
+          style={styles.searchButton}
           onPress={() => navigation.navigate('SearchScreen')}
         >
-          <Ionicons name="search" size={24} color="#114949" />
-          <Text
-            className="font-normal text-[#181818da] leading-[1.37vh] tracking-tight"
-            style={{ fontSize: normalize(17), fontFamily: 'mrt-400' }}
-          >
-            Search
-          </Text>
+          <Ionicons name="search" size={24} color={rooStyles.textPrimary} />
+          <Text style={styles.searchText}>Search</Text>
         </TouchableOpacity>
         <CartIcon
           size={38}
@@ -64,33 +53,27 @@ const HomeScreen = () => {
           showQuantity={true}
         />
       </View>
-      <ScrollView showsVerticalScrollIndicator={false} className="w-full">
-        <View
-          className="w-full"
-          style={{
-            paddingHorizontal: normalize(22, 'width'),
-          }}
-        >
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.carouselContainer}>
           <CarouselScreen />
         </View>
-        <View
-          className="w-full"
-          style={{
-            marginBottom: normalize(11, 'height'),
-          }}
-        >
-          <TitleContent title="Categories" marginTop={30} />
+        <View style={styles.titleWrapper}>
+          <TitleContent
+            title="Categories"
+            marginTop={normalize(30, 'height')}
+          />
         </View>
-        <MiniCards data={image} />
-        <View
-          className="w-full items-center flex-1"
-          style={{
-            marginBottom: normalize(67, 'height'),
-          }}
-        >
-          <TitleContent title="Most popular" marginTop={22} />
+        <MiniCards data={categories} />
+        <View style={styles.cardsContainer}>
+          <TitleContent
+            title="Most popular"
+            marginTop={normalize(22, 'height')}
+          />
           <Cards products={getProductsByView('popular')} />
-          <TitleContent title="Furniture sets" marginTop={12} />
+          <TitleContent
+            title="Furniture sets"
+            marginTop={normalize(12, 'height')}
+          />
           <Cards products={getProductsByView('set')} />
         </View>
       </ScrollView>

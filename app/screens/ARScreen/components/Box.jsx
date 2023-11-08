@@ -6,7 +6,7 @@ export default function Box(props) {
   )
 
   return (
-    <group {...props} dispose={null} scale={6} position={[0, -1.4, 0]}>
+    <group {...props} dispose={null} scale={6} position={[0, -2.4, 0]}>
       <mesh
         castShadow
         receiveShadow

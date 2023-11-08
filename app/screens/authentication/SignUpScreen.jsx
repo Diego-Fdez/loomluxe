@@ -2,43 +2,51 @@ import {
   Text,
   Image,
   KeyboardAvoidingView,
-  View,
   Dimensions,
+  ScrollView,
 } from 'react-native'
 import { Link } from '@react-navigation/native'
+import normalize from 'react-native-normalize'
 import { SignInOptions, SignUpForm } from './components'
+import { styles } from './styles/LoginScreen.styles'
+import { userStore } from '../../store'
+import { SpinnerScreen } from '../../components'
 
 const SignUpScreen = () => {
-  const height = Dimensions.get('window').height
+  const { height } = Dimensions.get('window')
+  const isLoading = userStore((state) => state.isLoading)
+
+  if (isLoading) return <SpinnerScreen />
 
   return (
-    <View className="flex-1">
-      <View className={height <= 812 ? 'h-60' : 'h-80'}>
-        <Image
-          source={require('../../../assets/Sign_up.png')}
-          className={`w-full ${height <= 812 ? 'h-70' : 'h-96'} object-cover`}
-        />
-      </View>
-      <KeyboardAvoidingView className="w-full flex-1 bg-[#E5E0D8] rounded-t-3xl items-center px-4 py-6">
-        <Text className="text-2xl mb-4" style={{ fontFamily: 'mrt-400' }}>
-          Create account
-        </Text>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    >
+      <Image
+        source={require('../../../assets/Sign_up.png')}
+        style={styles.image(height)}
+      />
+
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={styles.wrapper}
+        contentContainerStyle={{ paddingBottom: normalize(20, 'height') }}
+      >
+        <Text style={styles.title}>Create account</Text>
 
         <SignUpForm />
 
         <SignInOptions />
 
-        <Text
-          className={`font-light mt-8 ${height <= 812 ? 'mt-4' : 'mt-8'}`}
-          style={{ fontFamily: 'mrt-400' }}
-        >
+        <Text style={styles.linkText}>
           Already a member?
           <Link to="/LoginScreen">
-            <Text style={{ fontFamily: 'mrt-600' }}> Log In</Text>
+            <Text style={styles.linkTextBlack}> Log In</Text>
           </Link>
         </Text>
-      </KeyboardAvoidingView>
-    </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   )
 }
 

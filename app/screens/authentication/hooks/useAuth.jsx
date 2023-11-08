@@ -51,13 +51,18 @@ const useAuth = () => {
   }
 
   async function signup() {
+    setIsLoading(true)
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
     })
 
-    if (error) return Alert.alert(error.message)
+    if (error) {
+      setIsLoading(false)
+      return Alert.alert(error.message)
+    }
 
+    // Save the user in the clients table
     const { error: saveError } = await supabase
       .from('clients')
       .insert([
@@ -65,9 +70,13 @@ const useAuth = () => {
       ])
       .select()
 
-    if (saveError) return Alert.alert(saveError.message)
+    if (saveError) {
+      setIsLoading(false)
+      return Alert.alert(saveError.message)
+    }
 
     navigation.navigate('LoginScreen')
+    setIsLoading(false)
 
     setName('')
     setEmail('')
