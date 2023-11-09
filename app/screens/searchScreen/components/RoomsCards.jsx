@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native'
-import normalize from 'react-native-normalize'
-import { useNavigation } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons'
+import { styles } from '../styles/RoomsCards.styles'
+import { rooStyles } from '../../../constants'
 
 const ROOMS = [
   {
@@ -31,40 +31,28 @@ const ROOMS = [
 ]
 
 const RoomsCards = () => {
-  const navigation = useNavigation()
-
   return (
-    <View className="flex flex-row flex-wrap w-full items-center justify-between">
+    <View style={styles.container}>
       {ROOMS?.map((item) => (
         <TouchableOpacity
           onPress={() => console.log('from room')}
-          className="rounded-lg border border-[#CFD1C0] bg-primary p-[0.69vh]"
           key={item?.id}
-          style={{
-            width: normalize(163),
-            height: normalize(220),
-            marginBottom: normalize(22, 'height'),
-          }}
+          style={styles.wrapper}
         >
           <Image
             source={{
               uri: item?.image,
             }}
-            className="w-full object-cover rounded"
-            style={{
-              height: normalize(175),
-              marginBottom: normalize(11, 'height'),
-            }}
+            style={styles.image}
           />
-          <View className="flex flex-row w-full items-center justify-between">
-            <Text
-              className="leading-[1.31vh] tracking-tight"
-              style={{ fontSize: normalize(14), fontFamily: 'mrt-400' }}
-            >
-              {item?.name}
-            </Text>
-            <TouchableOpacity className="z-20">
-              <Ionicons name="chevron-forward" size={20} color="#114949" />
+          <View style={styles.textContainer}>
+            <Text style={styles.text}>{item?.name}</Text>
+            <TouchableOpacity style={styles.icon}>
+              <Ionicons
+                name="chevron-forward"
+                size={20}
+                color={rooStyles.textPrimary}
+              />
             </TouchableOpacity>
           </View>
         </TouchableOpacity>
