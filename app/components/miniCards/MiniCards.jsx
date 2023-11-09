@@ -5,7 +5,7 @@ import {
   Image,
   Text,
 } from 'react-native'
-import normalize from 'react-native-normalize'
+import { styles } from './MiniCards.styles'
 
 const MiniCards = ({ data }) => {
   const { width } = Dimensions.get('window')
@@ -18,22 +18,15 @@ const MiniCards = ({ data }) => {
       showsHorizontalScrollIndicator={false}
       renderItem={({ index, item }) => (
         <TouchableOpacity
-          className="flex justify-center items-center"
-          style={{
-            marginRight: normalize(27, 'width'),
-            marginLeft: index === 0 ? SPACING : 0,
-          }}
+          style={[
+            styles.cardContainer,
+            {
+              marginLeft: index === 0 ? SPACING : 0,
+            },
+          ]}
         >
-          <Image
-            source={{ uri: item?.image }}
-            className="w-14 h-14 rounded-lg object-cover"
-          />
-          <Text
-            className="leading-[1.31vh] tracking-tight mt-2 capitalize"
-            style={{ fontSize: normalize(10), fontFamily: 'mrt-400' }}
-          >
-            {item?.name}
-          </Text>
+          <Image source={{ uri: item?.image }} style={styles.image} />
+          <Text style={styles.categoryName}>{item?.name}</Text>
         </TouchableOpacity>
       )}
       keyExtractor={(item) => item?.id}

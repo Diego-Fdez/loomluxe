@@ -5,7 +5,6 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native'
-import normalize from 'react-native-normalize'
 import { Ionicons } from '@expo/vector-icons'
 import { StatusBar } from 'expo-status-bar'
 import { CarouselScreen } from './components'
@@ -58,22 +57,13 @@ const HomeScreen = ({ navigation }) => {
           <CarouselScreen />
         </View>
         <View style={styles.titleWrapper}>
-          <TitleContent
-            title="Categories"
-            marginTop={normalize(30, 'height')}
-          />
+          <TitleContent title="Categories" marginTop={30} />
         </View>
         <MiniCards data={categories} />
         <View style={styles.cardsContainer}>
-          <TitleContent
-            title="Most popular"
-            marginTop={normalize(22, 'height')}
-          />
+          <TitleContent title="Most popular" marginTop={22} />
           <Cards products={getProductsByView('popular')} />
-          <TitleContent
-            title="Furniture sets"
-            marginTop={normalize(12, 'height')}
-          />
+          <TitleContent title="Furniture sets" marginTop={12} />
           <Cards products={getProductsByView('set')} />
         </View>
       </ScrollView>

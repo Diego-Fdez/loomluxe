@@ -4,6 +4,8 @@ import { useNavigation } from '@react-navigation/native'
 import { Ionicons } from '@expo/vector-icons'
 import CartIcon from '../cartIcon/CartIcon'
 import { cartStore } from '../../store'
+import { styles } from './Card.styles'
+import { rooStyles } from '../../constants'
 
 const Card = ({ item, index, marginRight, leftSpace = true }) => {
   const navigation = useNavigation()
@@ -14,49 +16,35 @@ const Card = ({ item, index, marginRight, leftSpace = true }) => {
       onPress={() =>
         navigation.navigate('ProductDetailScreen', { itemId: item?.id })
       }
-      className="rounded-lg border border-[#CFD1C0] bg-primary p-2"
       key={item?.id}
-      style={{
-        width: normalize(163),
-        height: normalize(240),
-        marginBottom: normalize(22, 'height'),
-        marginRight: normalize(marginRight, 'width'),
-        marginTop: normalize(11, 'height'),
-        marginLeft: index === 0 && leftSpace ? normalize(22, 'width') : 0,
-      }}
+      style={[
+        styles.container,
+        {
+          marginRight: normalize(marginRight, 'width'),
+          marginLeft: index === 0 && leftSpace ? normalize(22, 'width') : 0,
+        },
+      ]}
     >
       <Image
         source={{
           uri: item?.images[0],
         }}
-        className="w-full object-cover rounded"
-        style={{
-          height: normalize(155),
-          marginBottom: normalize(8, 'height'),
-        }}
+        style={styles.image}
       />
-      <View className="flex flex-row w-full items-center justify-between">
-        <Text
-          className="leading-[1.31vh] tracking-tight"
-          style={{ fontSize: normalize(14), fontFamily: 'mrt-400' }}
-        >
-          {item?.name}
-        </Text>
-        <TouchableOpacity className="z-20">
-          <Ionicons name="md-heart-outline" size={18} color="black" />
+      <View style={styles.nameContainer}>
+        <Text style={styles.name}>{item?.name}</Text>
+        <TouchableOpacity style={styles.heartIcon}>
+          <Ionicons
+            name="md-heart-outline"
+            size={18}
+            color={rooStyles.textPrimary}
+          />
         </TouchableOpacity>
       </View>
-      <Text
-        className="font-extralight pb-2"
-        style={{ fontSize: normalize(10), fontFamily: 'mrt-200' }}
-      >
-        {item?.collection} collection
-      </Text>
-      <View className="flex flex-row w-full items-center justify-between">
-        <Text style={{ fontSize: normalize(14), fontFamily: 'mrt-400' }}>
-          ${item?.price}
-        </Text>
-        <View className="z-20">
+      <Text style={styles.textCollection}>{item?.collection} collection</Text>
+      <View style={styles.cartContainer}>
+        <Text style={styles.textPrice}>${item?.price}</Text>
+        <View style={styles.heartIcon}>
           <CartIcon
             size={22}
             handlePress={() => addToCart(item)}
