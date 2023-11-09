@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { styles } from './HeadTitle.styles'
-import { rootStyles } from '../../constants'
+import { rooStyles } from '../../constants'
 
 const HeadTitle = ({ title }) => {
   const navigation = useNavigation()
@@ -11,13 +11,9 @@ const HeadTitle = ({ title }) => {
     <View style={styles.container}>
       <TouchableOpacity
         onPress={() => navigation.goBack()}
-        className="absolute left-0"
+        style={styles.button}
       >
-        <Ionicons
-          name="chevron-back"
-          size={30}
-          color={rootStyles.textPrimary}
-        />
+        <Ionicons name="chevron-back" size={30} color={rooStyles.textPrimary} />
       </TouchableOpacity>
       <Text style={styles.title}>{title}</Text>
     </View>

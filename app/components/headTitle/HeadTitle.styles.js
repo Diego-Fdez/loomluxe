@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 import normalize from 'react-native-normalize'
-import { rooStyles, rootFonts } from '../../constants/rootStyles'
+import { rooStyles, rootFonts } from '../../constants'
 
 export const styles = StyleSheet.create({
   container: {
@@ -10,6 +10,10 @@ export const styles = StyleSheet.create({
     width: '100%',
     marginTop: normalize(44, 'height'),
     marginBottom: normalize(21, 'height'),
+  },
+  button: {
+    position: 'absolute',
+    left: 0,
   },
   title: {
     fontSize: normalize(rootFonts.h3),
