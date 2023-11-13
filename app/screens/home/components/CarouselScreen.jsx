@@ -1,4 +1,4 @@
-import { Image } from 'react-native'
+import { Image, StyleSheet } from 'react-native'
 import Carousel from 'react-native-reanimated-carousel'
 import normalize from 'react-native-normalize'
 import { BANNER_IMAGES } from '../../../constants'
@@ -18,12 +18,20 @@ const CarouselScreen = () => {
           source={{
             uri: item.image?.uri,
           }}
-          className="w-full object-cover rounded-lg"
-          style={{ height: normalize(155) }}
+          style={styles.image}
         />
       )}
     />
   )
 }
+
+const styles = StyleSheet.create({
+  image: {
+    width: '100%',
+    height: normalize(155),
+    borderRadius: normalize(8),
+    resizeMode: 'cover',
+  },
+})
 
 export default CarouselScreen
